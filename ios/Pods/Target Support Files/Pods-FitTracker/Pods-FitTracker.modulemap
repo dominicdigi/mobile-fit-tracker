@@ -1,0 +1,6 @@
+module Pods_FitTracker {
+  umbrella header "Pods-FitTracker-umbrella.h"
+
+  export *
+  module * { export * }
+}

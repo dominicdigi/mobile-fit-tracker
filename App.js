@@ -29,6 +29,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import CustomWebview from './src/components/webview/CustomWebview';
+import { GoogleSignin, GoogleSigninButton } from '@react-native-google-signin/google-signin';
 
 /* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
  * LTI update could not be added via codemod */
@@ -61,10 +62,52 @@ const Section = ({children, title}): Node => {
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const [data, setData] = useState("");
-  const [showLoginWebView, setShowLoginWebView] = useState(false);
+  const [userInfo, setUserInfo] = useState("");
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  };
+
+  GoogleSignin.configure({
+    scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
+    webClientId: '935356266275-gbp522qsjmtns3ujt84ulgo60vatvan6.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+    offlineAccess: false, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+    hostedDomain: '', // specifies a hosted domain restriction
+    forceCodeForRefreshToken: true, // [Android] related to `serverAuthCode`, read the docs link below *.
+    accountName: '', // [Android] specifies an account name on the device that should be used
+    iosClientId: '935356266275-gbkb2n1g354k4mbavda6mgfpq8pcr1vj.apps.googleusercontent.com', // [iOS] if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
+    googleServicePlistPath: '', // [iOS] if you renamed your GoogleService-Info file, new name here, e.g. GoogleService-Info-Staging
+    openIdRealm: '', // [iOS] The OpenID2 realm of the home web server. This allows Google to include the user's OpenID Identifier in the OpenID Connect ID token.
+    profileImageSize: 120, // [iOS] The desired height (and width) of the profile image. Defaults to 120px
+  });
+
+  // Somewhere in your code
+  const signIn = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      var userInfo = await GoogleSignin.signIn();
+      // TODO - grab id token and user info object to pass to backend
+      // create backend endpoing /auth/google/mobile
+      // verify id token and save user in backend create access and refresh token to pass back to frontend
+      // save access and refresh token in local storage
+      if(userInfo && userInfo.idToken){
+        userInfo = {"idToken": userInfo.idToken, "user": userInfo.user ? userInfo.user : ''};
+        
+      }
+      else {
+        // show message to user that login was unsuccesful
+      }
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (e.g. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+        // some other error happened
+      }
+    }
   };
 
   return (
@@ -82,6 +125,14 @@ const App: () => Node = () => {
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
           {/* {showLoginWebView ? <CustomWebview></CustomWebview> : ''} */}
+          <GoogleSigninButton
+  style={{ width: 192, height: 48 }}
+  size={GoogleSigninButton.Size.Wide}
+  color={GoogleSigninButton.Color.Dark}
+  onPress={() => signIn()}
+  // disabled={this.state.isSigninInProgress}
+/>         
+         
           <TouchableOpacity
           // () => Linking.openURL('http://localhost:3001/auth/login/google')
             //  onPress={() => setShowLoginWebView(true)}>

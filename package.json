@@ -10,6 +10,8 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-google-signin/google-signin": "^9.0.2",
+    "axios": "^1.2.3",
     "react": "18.1.0",
     "react-native": "0.70.6",
     "react-native-webview": "^11.26.0"

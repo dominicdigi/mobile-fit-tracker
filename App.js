@@ -31,6 +31,8 @@ import {
 import CustomWebview from './src/components/webview/CustomWebview';
 import { GoogleSignin, GoogleSigninButton } from '@react-native-google-signin/google-signin';
 
+import axios from 'axios';
+
 /* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
  * LTI update could not be added via codemod */
 const Section = ({children, title}): Node => {
@@ -81,18 +83,23 @@ const App: () => Node = () => {
     profileImageSize: 120, // [iOS] The desired height (and width) of the profile image. Defaults to 120px
   });
 
-  // Somewhere in your code
+  // TODO Create login component
   const signIn = async () => {
     try {
-      await GoogleSignin.hasPlayServices();
       var userInfo = await GoogleSignin.signIn();
-      // TODO - grab id token and user info object to pass to backend
-      // create backend endpoing /auth/google/mobile
-      // verify id token and save user in backend create access and refresh token to pass back to frontend
+      // TODO 
       // save access and refresh token in local storage
       if(userInfo && userInfo.idToken){
         userInfo = {"idToken": userInfo.idToken, "user": userInfo.user ? userInfo.user : ''};
-        
+        axios({
+          method: 'post',
+          url: 'http://localhost:3001/auth/google/verify',
+          data: userInfo
+        }).then(res => {
+          var tokens = res;
+        }).catch(function (error){
+            console.log(error);
+        });
       }
       else {
         // show message to user that login was unsuccesful

@@ -20,51 +20,36 @@ import {
   Linking
 } from 'react-native';
 
-import {
-  Colors,
-  Header,
-} from 'react-native/Libraries/NewAppScreen';
+
+import { black, white } from './src/styles/colors.js';
 
 import Login from './src/components/login/Login.jsx';
+import Dashboard from './src/components/dashboard/Dashboard.jsx';
 import store from './src/redux/store';
 import { Provider } from 'react-redux';
+import {AxiosProvider} from './src/services/api.jsx';
 
 const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-  const [data, setData] = useState("");
-  const [userInfo, setUserInfo] = useState("");
+  const isDarkMode = true;
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: isDarkMode ? black : white,
   };
 
+  StatusBar.setBarStyle('light-content', true);
+
   return (
-    <Provider store={store}>
-      <SafeAreaView style={backgroundStyle}>
-        <Login></Login>
-          
-      </SafeAreaView>
-    </Provider>
+      <Provider store={store}>
+        <AxiosProvider>
+          <SafeAreaView style={backgroundStyle}>
+          <ScrollView>
+            <Login></Login>
+            <Dashboard></Dashboard>
+          </ScrollView>
+          </SafeAreaView>
+        </AxiosProvider>
+      </Provider>
   );
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;

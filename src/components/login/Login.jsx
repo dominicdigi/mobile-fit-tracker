@@ -58,14 +58,14 @@ export default function Login() {
 
   return (
     <View>
-      <Text>Hello, {authState.user.first_name}</Text>
+    {!authState.user.first_name && 
       <GoogleSigninButton
         style={{ width: 192, height: 48 }}
         size={GoogleSigninButton.Size.Wide}
         color={GoogleSigninButton.Color.Dark}
         onPress={() => signIn()}
         // disabled={this.state.isSigninInProgress}
-        />
+        />}
     </View>
   )
 }

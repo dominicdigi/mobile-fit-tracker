@@ -4,7 +4,9 @@ import { useSelector } from 'react-redux';
 import {AxiosContext} from '../../services/api.jsx';
 import WorkoutList from '../WorkoutList/WorkoutList.jsx';
 import _ from "lodash";
-import DSText from '../base/Text/DSText.jsx';
+import DTText from '../base/Text/DTText.jsx';
+import { ScrollView } from 'react-native-gesture-handler';
+import { black } from '../../styles/colors.js';
 
 export default function Dashboard() {
     const authState = useSelector(state => state.userAuth);
@@ -19,9 +21,9 @@ export default function Dashboard() {
     }, [authState.accessToken]);
 
     return (
-    <View>
-        <DSText text={'Hello, ' + authState.user.first_name}></DSText>
+    <ScrollView style={{ flex: 1, backgroundColor: black }}>
+        <DTText text={'Hello, ' + authState.user.first_name}></DTText>
         <WorkoutList workouts={workouts}></WorkoutList>
-    </View>
+    </ScrollView>
     )
 }

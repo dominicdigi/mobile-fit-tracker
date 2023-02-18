@@ -28,6 +28,8 @@ import Dashboard from './src/components/dashboard/Dashboard.jsx';
 import store from './src/redux/store';
 import { Provider } from 'react-redux';
 import {AxiosProvider} from './src/services/api.jsx';
+import { NavigationContainer } from '@react-navigation/native';
+import StackNavigator from './src/navigators/StackNavigator.js';
 
 const App: () => Node = () => {
   const isDarkMode = true;
@@ -41,11 +43,11 @@ const App: () => Node = () => {
   return (
       <Provider store={store}>
         <AxiosProvider>
-          <SafeAreaView style={backgroundStyle}>
-          <ScrollView>
-            <Login></Login>
-            <Dashboard></Dashboard>
-          </ScrollView>
+          {/* what should the background color of the safearea be? */}
+          <SafeAreaView style={{ flex: 1, backgroundColor: black }}>
+            <NavigationContainer>
+              <StackNavigator />
+            </NavigationContainer>
           </SafeAreaView>
         </AxiosProvider>
       </Provider>

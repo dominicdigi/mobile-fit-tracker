@@ -1,11 +1,13 @@
-import { View, Text } from 'react-native'
+import { View, Image } from 'react-native'
 import React from 'react'
 import { GoogleSignin, GoogleSigninButton } from '@react-native-google-signin/google-signin';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { addAccessToken, addRefreshToken, addUser } from '../../redux/actions/loginActions';
+import DTText from '../base/Text/DTText';
+import { black } from '../../styles/colors';
 
-export default function Login() {
+export default function Login({navigation}) {
     GoogleSignin.configure({
         scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
         webClientId: '935356266275-gbp522qsjmtns3ujt84ulgo60vatvan6.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
@@ -35,6 +37,7 @@ export default function Login() {
                         dispatch(addAccessToken(res.data.accessToken));
                         dispatch(addRefreshToken(res.data.refreshToken));
                         dispatch(addUser(res.data.user));
+                        navigation.navigate('Home');
                     }
                 }).catch(function (error){
                     console.log(error);
@@ -56,16 +59,26 @@ export default function Login() {
         }
     };
 
+    // TODO add use effect that checks if the user is already logged in and then navigate
+    // them to the Home page
+
   return (
-    <View>
-    {!authState.user.first_name && 
-      <GoogleSigninButton
-        style={{ width: 192, height: 48 }}
-        size={GoogleSigninButton.Size.Wide}
-        color={GoogleSigninButton.Color.Dark}
-        onPress={() => signIn()}
-        // disabled={this.state.isSigninInProgress}
-        />}
+    <View style={{backgroundColor: black, flex: 1}}>
+      {/* {!authState.user.first_name &&  */}
+        {/* <DTText text={"Dominate Your Training"} fontSize={28} fontWeight={'600'}></DTText> */}
+        <Image
+            source={require('../../assets/icons/dtlogo-with-text.png')}
+            style={{ width: 375, height: 90 }}
+        />
+        <DTText text={"Create an account or login to track workouts, view analytics, and much more."}></DTText>
+        <GoogleSigninButton
+            style={{ width: 192, height: 48 }}
+            size={GoogleSigninButton.Size.Wide}
+            color={GoogleSigninButton.Color.Dark}
+            onPress={() => signIn()}
+            // disabled={this.state.isSigninInProgress}
+        />
+      {/* } */}
     </View>
   )
 }

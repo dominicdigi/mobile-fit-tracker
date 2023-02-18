@@ -1,7 +1,7 @@
 import { View, StyleSheet } from 'react-native'
 import React from 'react'
 import WorkoutCard from '../WorkoutCard/WorkoutCard'
-import DSText from '../base/Text/DSText';
+import DTText from '../base/Text/DTText';
 
 export default function WorkoutList(props) {
   const styles = StyleSheet.create({
@@ -13,7 +13,7 @@ export default function WorkoutList(props) {
 
   return (
     <View style={styles.container}>
-      <DSText text={'Workout History'}></DSText>
+      <DTText text={'Workout History'}></DTText>
       {/* loop through workouts and display cards */}
       {props.workouts.map((el, index) => {
         return (

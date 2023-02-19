@@ -1,16 +1,18 @@
 import { View, FlatList} from 'react-native'
 import {React, useEffect, useState} from 'react'
-import DSText from '../base/Text/DSText';
-import DSButton from '../base/Button/DSButton';
+import DTText from '../Base/Text/DTText';
+import DTButton from '../Base/Button/DTButton';
 import dateFormat from "dateformat";
 import _ from "lodash";
 import {CheckIcon} from '../../assets/icons/svgs'
 import styles from './WorkoutCardStyles';
 import { darkGrey2 } from '../../styles/colors';
+import { useNavigation } from '@react-navigation/native';
 
 export default function WorkoutCard(props) {
   const [exercisesCompleted, setExercisesCompleted] = useState([]);
   const [workoutCompletionPercentage, setWorkoutCompletionPercentage] = useState(0);
+  const navigation = useNavigation();
 
     useEffect(() => {
       const exercises = props.workout.exercises;
@@ -48,10 +50,10 @@ export default function WorkoutCard(props) {
     return (
       <View style={styles.gridItem}>
         <View style={[styles.gridColumn, {width: '70%'}]}>
-          <DSText text={item.ex_name} fontSize={12}></DSText>
+          <DTText text={item.ex_name} fontSize={12}></DTText>
         </View>
         <View style={[styles.gridColumn, {width: '15%'}]}>
-          <DSText text={item.sets.length} fontSize={12}></DSText>
+          <DTText text={item.sets.length} fontSize={12}></DTText>
         </View>
         <View style={[styles.gridColumn, {width: '15%'}]}>
           {exercisesCompleted.some(exercise => exercise === item.exercise_id) && <View style={styles.checkIcon}><CheckIcon height={10} width={10}></CheckIcon></View>}
@@ -60,14 +62,21 @@ export default function WorkoutCard(props) {
     );
   };
 
+  const editWorkoutClick = () => {
+    const workoutId = props.workout ? props.workout.workout_id : 0;
+    if(workoutId){
+      navigation.navigate('WorkoutDetail', { workoutId: workoutId});
+    }
+  };
+
   const GridHeader = () => {
     return (
       <View style={styles.gridHeader}>
         <View style={[styles.gridHeaderColumn, {width: '70%'}]}>
-          <DSText color={darkGrey2} text={'Name'} fontSize={12}></DSText>
+          <DTText color={darkGrey2} text={'Name'} fontSize={12}></DTText>
         </View>
         <View style={[styles.gridHeaderColumn, {width: '15%'}]}>
-          <DSText color={darkGrey2} text={'Sets'} fontSize={12}></DSText>
+          <DTText color={darkGrey2} text={'Sets'} fontSize={12}></DTText>
         </View>
         <View style={[styles.gridHeaderColumn, {width: '15%'}]}>
         </View>
@@ -79,8 +88,8 @@ export default function WorkoutCard(props) {
     <View style={styles.cardContainer}>
       <View style={styles.cardDetailContainer}>
         <View style={styles.cardDetailHeader}>
-          <DSText text={props.workout.name} fontSize={16} width={'55%'} fontWeight={'600'}></DSText>
-          <DSText text={dateFormat(props.workout.date, "mmm. d - yyyy", true)} fontSize={12} width={'25%'}></DSText>
+          <DTText text={props.workout.name} fontSize={16} width={'55%'} fontWeight={'600'}></DTText>
+          <DTText text={dateFormat(props.workout.date, "mmm. d - yyyy", true)} fontSize={12} width={'25%'}></DTText>
         </View>
         <View style={styles.borderProgressWrapper}>
           <View style={[styles.borderProgressBar, {width: workoutCompletionPercentage + "%"}]}></View>
@@ -94,9 +103,7 @@ export default function WorkoutCard(props) {
           keyExtractor={item => item.exercise_id}
         />
       </View>
-      <View style={styles.cardButtonContainer}>
-        <DSButton text={'Edit Workout'}></DSButton>
-      </View>
+      <DTButton text={'Edit Workout'} onClick={editWorkoutClick}></DTButton>
     </View>
   )
 }

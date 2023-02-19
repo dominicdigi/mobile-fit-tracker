@@ -14,6 +14,7 @@ export default function Dashboard() {
     const [workouts, setWorkouts] = useState([]);
 
     useEffect(() => {
+        // TODO make this authorized call
         authAxios.get('/workoutlist').then(res => {
             var workoutRes = _.get(res, 'data');
             setWorkouts(workoutRes);

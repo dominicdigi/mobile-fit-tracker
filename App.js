@@ -19,12 +19,7 @@ import {
   TouchableOpacity,
   Linking
 } from 'react-native';
-
-
 import { black, white } from './src/styles/colors.js';
-
-import Login from './src/components/login/Login.jsx';
-import Dashboard from './src/components/dashboard/Dashboard.jsx';
 import store from './src/redux/store';
 import { Provider } from 'react-redux';
 import {AxiosProvider} from './src/services/api.jsx';

@@ -1,16 +1,18 @@
 import { View, FlatList} from 'react-native'
 import {React, useEffect, useState} from 'react'
-import DTText from '../base/Text/DTText';
-import DSButton from '../base/Button/DSButton';
+import DTText from '../Base/Text/DTText';
+import DTButton from '../Base/Button/DTButton';
 import dateFormat from "dateformat";
 import _ from "lodash";
 import {CheckIcon} from '../../assets/icons/svgs'
 import styles from './WorkoutCardStyles';
 import { darkGrey2 } from '../../styles/colors';
+import { useNavigation } from '@react-navigation/native';
 
 export default function WorkoutCard(props) {
   const [exercisesCompleted, setExercisesCompleted] = useState([]);
   const [workoutCompletionPercentage, setWorkoutCompletionPercentage] = useState(0);
+  const navigation = useNavigation();
 
     useEffect(() => {
       const exercises = props.workout.exercises;
@@ -60,6 +62,13 @@ export default function WorkoutCard(props) {
     );
   };
 
+  const editWorkoutClick = () => {
+    const workoutId = props.workout ? props.workout.workout_id : 0;
+    if(workoutId){
+      navigation.navigate('WorkoutDetail', { workoutId: workoutId});
+    }
+  };
+
   const GridHeader = () => {
     return (
       <View style={styles.gridHeader}>
@@ -94,9 +103,7 @@ export default function WorkoutCard(props) {
           keyExtractor={item => item.exercise_id}
         />
       </View>
-      <View style={styles.cardButtonContainer}>
-        <DSButton text={'Edit Workout'}></DSButton>
-      </View>
+      <DTButton text={'Edit Workout'} onClick={editWorkoutClick}></DTButton>
     </View>
   )
 }

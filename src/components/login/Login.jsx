@@ -4,7 +4,7 @@ import { GoogleSignin, GoogleSigninButton } from '@react-native-google-signin/go
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { addAccessToken, addRefreshToken, addUser } from '../../redux/actions/loginActions';
-import DTText from '../base/Text/DTText';
+import DTText from '../Base/Text/DTText';
 import { black } from '../../styles/colors';
 
 export default function Login({navigation}) {

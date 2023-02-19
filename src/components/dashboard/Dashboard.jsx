@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import {AxiosContext} from '../../services/api.jsx';
 import WorkoutList from '../WorkoutList/WorkoutList.jsx';
 import _ from "lodash";
-import DTText from '../base/Text/DTText.jsx';
+import DTText from '../Base/Text/DTText.jsx';
 import { ScrollView } from 'react-native-gesture-handler';
 import { black } from '../../styles/colors.js';
 
@@ -21,9 +21,11 @@ export default function Dashboard() {
     }, [authState.accessToken]);
 
     return (
-    <ScrollView style={{ flex: 1, backgroundColor: black }}>
+    // <ScrollView style={{ flex: 1, backgroundColor: black }}>
+    <View style={{ flex: 1, backgroundColor: black }}>
         <DTText text={'Hello, ' + authState.user.first_name}></DTText>
         <WorkoutList workouts={workouts}></WorkoutList>
-    </ScrollView>
+    </View>
+    // </ScrollView>
     )
 }

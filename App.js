@@ -7,26 +7,19 @@
  */
 
 import React, {useState} from 'react';
-import type {Node} from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  TouchableOpacity,
-  Linking
 } from 'react-native';
 import { black, white } from './src/styles/colors.js';
-import store from './src/redux/store';
+import {store, persistor} from './src/redux/store';
 import { Provider } from 'react-redux';
 import {AxiosProvider} from './src/services/api.jsx';
 import { NavigationContainer } from '@react-navigation/native';
 import StackNavigator from './src/navigators/StackNavigator.js';
+import { PersistGate } from 'redux-persist/integration/react';
 
-const App: () => Node = () => {
+const App = () => {
   const isDarkMode = true;
 
   const backgroundStyle = {
@@ -37,14 +30,16 @@ const App: () => Node = () => {
 
   return (
       <Provider store={store}>
-        <AxiosProvider>
-          {/* what should the background color of the safearea be? */}
-          <SafeAreaView style={{ flex: 1, backgroundColor: black }}>
-            <NavigationContainer>
-              <StackNavigator />
-            </NavigationContainer>
-          </SafeAreaView>
-        </AxiosProvider>
+        <PersistGate loading={null} persistor={persistor}>
+          <AxiosProvider>
+            {/* what should the background color of the safearea be? */}
+            <SafeAreaView style={{ flex: 1, backgroundColor: black }}>
+              <NavigationContainer>
+                <StackNavigator />
+              </NavigationContainer>
+            </SafeAreaView>
+          </AxiosProvider>
+        </PersistGate>
       </Provider>
   );
 };

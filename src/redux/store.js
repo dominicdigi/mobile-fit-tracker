@@ -1,10 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import loginReducer from './reducers/loginReducer';
+import { persistStore } from 'redux-persist';
 
 const store = configureStore({
-    reducer: {
-      userAuth: loginReducer,
-    }
-  })
+  reducer: {
+    userAuth: loginReducer,
+  }
+});
 
-export default store;
+const persistor = persistStore(store);
+
+export { store, persistor };

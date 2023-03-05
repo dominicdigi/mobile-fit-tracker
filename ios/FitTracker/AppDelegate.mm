@@ -6,6 +6,7 @@
 
 #import <React/RCTAppSetupUtils.h>
 #import <React/RCTLinkingManager.h>
+#import <UIKit/UIKit.h>
 
 #if RCT_NEW_ARCH_ENABLED
 #import <React/CoreModulesPlugins.h>
@@ -53,11 +54,15 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
     rootView.backgroundColor = [UIColor whiteColor];
   }
 
+  // Set the default tint color to red
+  [[UIView appearance] setTintColor:[UIColor colorWithRed:0.451 green:0.451 blue:1.000 alpha:1]];
+
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+
   return YES;
 }
 

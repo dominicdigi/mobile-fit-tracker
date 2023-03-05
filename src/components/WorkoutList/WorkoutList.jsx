@@ -19,15 +19,10 @@ export default function WorkoutList(props) {
       <DTText text={'Workout History'}></DTText>
       {/* loop through workouts and display cards */}
       <FlatList
-      data={props.workouts}
-      renderItem={renderItem}
-      keyExtractor={(item) => item.workout_id}
-    />
-      {/* {props.workouts.map((el, index) => {
-        return (
-            <WorkoutCard workout={el}></WorkoutCard>
-        )
-      })} */}
+        data={props.workouts}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.workout_id}
+      />
     </View>
   )
 }

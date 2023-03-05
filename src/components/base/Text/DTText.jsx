@@ -11,10 +11,10 @@ export default function DTText(props) {
 
   const { color = white, 
   fontSize = 16, 
-  width = '100%', 
-  fontWeight = 'normal' } = props;
+  fontWeight = 'normal', 
+  width = '100%' } = props;
 
   return (
-    <Text style={[styles.text, { color, fontSize, width, fontWeight }]}>{props.text}</Text>
+    <Text style={[styles.text, { color, fontSize, fontWeight, width }]} onPress={props.onPress}>{props.text}</Text>
   )
 }

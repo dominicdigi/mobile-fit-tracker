@@ -9,11 +9,11 @@ const AxiosProvider = ({children}) => {
   const authState = useSelector(state => state.userAuth);
 
   const authAxios = axios.create({
-    baseURL: 'http://localhost:3001',
+    baseURL: 'https://www.dominate.training:3001',
   });
 
   const publicAxios = axios.create({
-    baseURL: 'http://localhost:3001',
+    baseURL: 'https://www.dominate.training:3001',
   });
 
   authAxios.interceptors.request.use(

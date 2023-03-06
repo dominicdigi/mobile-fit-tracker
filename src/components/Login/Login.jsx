@@ -30,7 +30,7 @@ export default function Login({navigation}) {
                 userInfo = {"idToken": userInfo.idToken, "user": userInfo.user ? userInfo.user : ''};
                 axios({
                 method: 'post',
-                url: 'http://localhost:3001/auth/google/verify',
+                url: 'https://dominate.training:3001/auth/google/verify',
                 data: userInfo
                 }).then(res => {
                     if(res && res.data){

@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
     },
     gridColumn: {
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      paddingEnd: 4,
     },
     checkIcon : {
       backgroundColor: secondary,

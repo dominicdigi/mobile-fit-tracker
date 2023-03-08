@@ -36,7 +36,7 @@ export default function WorkoutDetail({ route }) {
     useEffect(() => {
       // edit existing workout
       if(workoutId){
-        authAxios.get('/workout/' + workoutId).then(res => {
+        authAxios.get('/mobile/workout/' + workoutId).then(res => {
             const workoutDetailRes = _.get(res, 'data');
             const exerciseRes = workoutDetailRes.exercises ? workoutDetailRes.exercises : {};
             const workoutRes = workoutDetailRes.workout ? workoutDetailRes.workout : {};
@@ -54,8 +54,8 @@ export default function WorkoutDetail({ route }) {
       }
     }, [workoutId]);
 
-    const renderExerciseDetail = ({ item }) => {
-      return <ExerciseDetail></ExerciseDetail>;
+    const renderExerciseDetail = ({item}) => {
+      return <ExerciseDetail exercise={item}></ExerciseDetail>;
     };
 
   return (
@@ -63,11 +63,11 @@ export default function WorkoutDetail({ route }) {
       <BackNav></BackNav>
       <DTText text={workout.name}></DTText>
       <WorkoutDate workout={workout} setWorkoutDate={setWorkoutDate}></WorkoutDate>
-      {/* <FlatList
+      <FlatList
         data={exercises}
         renderItem={renderExerciseDetail}
-        keyExtractor={(item) => item.exercise_id}
-      /> */}
+        keyExtractor={(item) => item.exerciseId}
+      />
 
       <DTModal headerText={'test modal'} show={false}></DTModal>
     </View>

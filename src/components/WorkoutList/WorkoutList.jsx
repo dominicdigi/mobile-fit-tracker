@@ -21,7 +21,7 @@ export default function WorkoutList(props) {
       <FlatList
         data={props.workouts}
         renderItem={renderItem}
-        keyExtractor={(item) => item.workout_id}
+        keyExtractor={(item) => item.workoutId}
       />
     </View>
   )

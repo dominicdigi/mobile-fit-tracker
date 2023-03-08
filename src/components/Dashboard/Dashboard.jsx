@@ -18,6 +18,11 @@ export default function Dashboard() {
         authAxios.get('/workoutlist').then(res => {
             var workoutRes = _.get(res, 'data');
             setWorkouts(workoutRes);
+        }).catch(function (error) {
+            // unauthorized
+            if(error.response.status===401){
+                navigation.navigate('Login');
+            }
         });
     }, [authState.accessToken]);
 

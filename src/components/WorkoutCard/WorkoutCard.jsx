@@ -50,20 +50,20 @@ export default function WorkoutCard(props) {
     return (
       <View style={styles.gridItem}>
         <View style={[styles.gridColumn, {width: '70%'}]}>
-          <DTText text={item.ex_name} fontSize={12}></DTText>
+          <DTText text={item.exName} fontSize={12}></DTText>
         </View>
         <View style={[styles.gridColumn, {width: '15%'}]}>
           <DTText text={item.sets.length} fontSize={12}></DTText>
         </View>
         <View style={[styles.gridColumn, {width: '15%'}]}>
-          {exercisesCompleted.some(exercise => exercise === item.exercise_id) && <View style={styles.checkIcon}><CheckIcon height={10} width={10}></CheckIcon></View>}
+          {exercisesCompleted.some(exercise => exercise === item.exerciseId) && <View style={styles.checkIcon}><CheckIcon height={10} width={10}></CheckIcon></View>}
         </View>
       </View>
     );
   };
 
   const editWorkoutClick = () => {
-    const workoutId = props.workout ? props.workout.workout_id : 0;
+    const workoutId = props.workout ? props.workout.workoutId : 0;
     if(workoutId){
       navigation.navigate('WorkoutDetail', { workoutId: workoutId});
     }
@@ -100,7 +100,7 @@ export default function WorkoutCard(props) {
           data={props.workout.exercises}
           numColumns={1}
           renderItem={({ item }) => <GridItem item={item} />}
-          keyExtractor={item => item.exercise_id}
+          keyExtractor={item => item.exerciseId}
         />
       </View>
       <DTButton text={'Edit Workout'} onClick={editWorkoutClick}></DTButton>

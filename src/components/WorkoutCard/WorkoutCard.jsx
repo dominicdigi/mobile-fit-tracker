@@ -32,7 +32,7 @@ export default function WorkoutCard(props) {
               totalSetCount++;
           });
           if(exerciseCompleted){
-              exercisesCompleted.push(exercise.exercise_id);
+              exercisesCompleted.push(exercise.exerciseId);
           }
       });
       if(totalSetCount !== 0){
@@ -50,10 +50,10 @@ export default function WorkoutCard(props) {
     return (
       <View style={styles.gridItem}>
         <View style={[styles.gridColumn, {width: '70%'}]}>
-          <DTText text={item.exName} fontSize={12}></DTText>
+          <DTText width={'100%'} text={item.exName} fontSize={12}></DTText>
         </View>
         <View style={[styles.gridColumn, {width: '15%'}]}>
-          <DTText text={item.sets.length} fontSize={12}></DTText>
+          <DTText width={'100%'} text={item.sets.length} fontSize={12}></DTText>
         </View>
         <View style={[styles.gridColumn, {width: '15%'}]}>
           {exercisesCompleted.some(exercise => exercise === item.exerciseId) && <View style={styles.checkIcon}><CheckIcon height={10} width={10}></CheckIcon></View>}
@@ -73,10 +73,10 @@ export default function WorkoutCard(props) {
     return (
       <View style={styles.gridHeader}>
         <View style={[styles.gridHeaderColumn, {width: '70%'}]}>
-          <DTText color={darkGrey2} text={'Name'} fontSize={12}></DTText>
+          <DTText width={'100%'} color={darkGrey2} text={'Name'} fontSize={12}></DTText>
         </View>
         <View style={[styles.gridHeaderColumn, {width: '15%'}]}>
-          <DTText color={darkGrey2} text={'Sets'} fontSize={12}></DTText>
+          <DTText width={'100%'} color={darkGrey2} text={'Sets'} fontSize={12}></DTText>
         </View>
         <View style={[styles.gridHeaderColumn, {width: '15%'}]}>
         </View>
@@ -103,7 +103,7 @@ export default function WorkoutCard(props) {
           keyExtractor={item => item.exerciseId}
         />
       </View>
-      <DTButton text={'Edit Workout'} onClick={editWorkoutClick}></DTButton>
+      <DTButton text={'Edit Workout'} width={'100%'} onClick={editWorkoutClick}></DTButton>
     </View>
   )
 }

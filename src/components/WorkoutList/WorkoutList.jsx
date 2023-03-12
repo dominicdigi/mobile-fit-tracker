@@ -6,8 +6,11 @@ import DTText from '../Base/Text/DTText';
 export default function WorkoutList(props) {
   const styles = StyleSheet.create({
     container: {
-      marginTop: 50,
+      marginTop: 20,
     },
+    title: {
+      marginLeft: 10, 
+    }
   });
 
   const renderItem = ({ item }) => {
@@ -16,7 +19,7 @@ export default function WorkoutList(props) {
 
   return (
     <View style={styles.container}>
-      <DTText text={'Workout History'}></DTText>
+      <DTText style={styles.title} text={'Workout History'}></DTText>
       {/* loop through workouts and display cards */}
       <FlatList
         data={props.workouts}

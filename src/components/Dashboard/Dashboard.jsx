@@ -7,11 +7,13 @@ import _ from "lodash";
 import DTText from '../Base/Text/DTText.jsx';
 import { ScrollView } from 'react-native-gesture-handler';
 import { black } from '../../styles/colors.js';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Dashboard() {
     const authState = useSelector(state => state.userAuth);
     const {publicAxios, authAxios} = useContext(AxiosContext);
     const [workouts, setWorkouts] = useState([]);
+    const navigation = useNavigation();
 
     useEffect(() => {
         // TODO make this authorized call

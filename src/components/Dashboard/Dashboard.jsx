@@ -5,7 +5,6 @@ import {AxiosContext} from '../../services/api.jsx';
 import WorkoutList from '../WorkoutList/WorkoutList.jsx';
 import _ from "lodash";
 import DTText from '../Base/Text/DTText.jsx';
-import { ScrollView } from 'react-native-gesture-handler';
 import { black } from '../../styles/colors.js';
 import { useNavigation } from '@react-navigation/native';
 
@@ -29,11 +28,9 @@ export default function Dashboard() {
     }, [authState.accessToken]);
 
     return (
-    // <ScrollView style={{ flex: 1, backgroundColor: black }}>
-    <View style={{ flex: 1, backgroundColor: black }}>
-        <DTText text={'Hello, ' + authState.user.first_name}></DTText>
+    <View style={{ flex: 1, backgroundColor: black, height: '100%' }}>
+        {/* <DTText text={'Hello, ' + authState.user.first_name}></DTText> */}
         <WorkoutList workouts={workouts}></WorkoutList>
     </View>
-    // </ScrollView>
     )
 }

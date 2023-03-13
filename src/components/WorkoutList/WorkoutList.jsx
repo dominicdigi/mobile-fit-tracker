@@ -7,6 +7,7 @@ export default function WorkoutList(props) {
   const styles = StyleSheet.create({
     container: {
       marginTop: 20,
+      height: '100%'
     },
     title: {
       marginLeft: 10, 

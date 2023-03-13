@@ -17,7 +17,7 @@ import DTButton from '../Base/Button/DTButton';
 import { Add, CheckIcon } from '../../assets/icons/svgs';
 
 export default function WorkoutDetail({ route }) {
-    const { workoutId } = route.params;
+    const { workoutId } = route.params ? route.params : "";
     const {authAxios} = useContext(AxiosContext);
     const [workout, setWorkout] = useImmer({}); // workout details
     const [exercises, setExercises] = useImmer({}); // exercises in the workout

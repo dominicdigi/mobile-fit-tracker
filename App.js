@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React, {useState} from 'react';
 import {
   SafeAreaView,
@@ -18,6 +10,7 @@ import {AxiosProvider} from './src/services/api.jsx';
 import { NavigationContainer } from '@react-navigation/native';
 import StackNavigator from './src/navigators/StackNavigator.js';
 import { PersistGate } from 'redux-persist/integration/react';
+import NavBar from './src/components/NavBar/NavBar.jsx';
 
 const App = () => {
   const isDarkMode = true;
@@ -36,6 +29,7 @@ const App = () => {
             <SafeAreaView style={{ flex: 1, backgroundColor: black }}>
               <NavigationContainer>
                 <StackNavigator />
+                <NavBar></NavBar>
               </NavigationContainer>
             </SafeAreaView>
           </AxiosProvider>
